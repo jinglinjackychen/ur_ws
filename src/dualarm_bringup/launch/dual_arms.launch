@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<launch>
+    <!-- Parameter -->
+    <arg name="use_ur5" default="false" />
+    <arg name="use_vx300s" default="false" />
+
+    <group if="$(eval arg('use_vx300s') == true)">
+        <include file="$(find interbotix_moveit)/launch/interbotix_moveit_vx300s_short.launch" />
+    </group>
+
+    <group  if="$(eval arg('use_ur5') == true)" ns="ur5">
+        <!-- UR5 driver -->
+        <include file="$(find ur_modern_driver)/launch/ur5_bringup.launch">
+            <arg name="robot_ip" default="192.168.50.11" />
+        </include>
+
+        <!-- MoveIt planning tool -->
+        <include file="$(find ur5_moveit_config)/launch/ur5_moveit_planning_execution.launch" />
+
+        <!-- robotiq 2-finger gripper -->
+        <node name="robotiq2FGripper" pkg="robotiq_2f_gripper_control" type="Robotiq2FGripperRtuNode.py"  args="/dev/ttyUSB0" required="true" />
+
+        <!-- RVIZ -->
+        <!-- include file="$(find ur5_moveit_config)/launch/moveit_rviz.launch" -->
+            <!-- arg name="config" default="true" / -->
+        <!-- /include -->
+    </group>
+
+</launch>

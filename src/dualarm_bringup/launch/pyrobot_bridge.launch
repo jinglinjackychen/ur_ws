@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<launch>
+    <!-- Parameter -->
+    <arg name="use_ur5" default="true" />
+    <arg name="use_vx300s" default="true" />
+
+    <group if="$(eval arg('use_vx300s') == true)">
+        <node name="kinematics_vx300s" pkg="pyrobot_bridge" type="kinematics_vx300s.py" output="screen"/>
+        <node name="moveit_bridge_vx300s" pkg="pyrobot_bridge" type="moveit_bridge_vx300s.py" output="screen"/>
+    </group>
+
+    <group  if="$(eval arg('use_ur5') == true)">
+        <node name="kinematics_ur5" pkg="pyrobot_bridge" type="kinematics_ur5.py" output="screen"/>
+        <node name="moveit_bridge_ur5" pkg="pyrobot_bridge" type="moveit_bridge_ur5.py" output="screen"/>
+    </group>
+    
+</launch>

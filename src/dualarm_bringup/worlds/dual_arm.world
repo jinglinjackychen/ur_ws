@@ -1,0 +1,1754 @@
+<sdf version='1.6'>
+  <world name='default'>
+    <light name='sun' type='directional'>
+      <cast_shadows>1</cast_shadows>
+      <pose frame=''>0 0 10 0 -0 0</pose>
+      <diffuse>0.8 0.8 0.8 1</diffuse>
+      <specular>0.2 0.2 0.2 1</specular>
+      <attenuation>
+        <range>1000</range>
+        <constant>0.9</constant>
+        <linear>0.01</linear>
+        <quadratic>0.001</quadratic>
+      </attenuation>
+      <direction>-0.5 0.1 -0.9</direction>
+    </light>
+    <model name='ground_plane'>
+      <static>1</static>
+      <link name='link'>
+        <collision name='collision'>
+          <geometry>
+            <plane>
+              <normal>0 0 1</normal>
+              <size>100 100</size>
+            </plane>
+          </geometry>
+          <surface>
+            <contact>
+              <collide_bitmask>65535</collide_bitmask>
+              <ode/>
+            </contact>
+            <friction>
+              <ode>
+                <mu>100</mu>
+                <mu2>50</mu2>
+              </ode>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <bounce/>
+          </surface>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <visual name='visual'>
+          <cast_shadows>0</cast_shadows>
+          <geometry>
+            <plane>
+              <normal>0 0 1</normal>
+              <size>100 100</size>
+            </plane>
+          </geometry>
+          <material>
+            <script>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+              <name>Gazebo/Grey</name>
+            </script>
+          </material>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+    </model>
+    <gravity>0 0 -9.8</gravity>
+    <magnetic_field>6e-06 2.3e-05 -4.2e-05</magnetic_field>
+    <atmosphere type='adiabatic'/>
+    <physics name='default_physics' default='0' type='ode'>
+      <max_step_size>0.001</max_step_size>
+      <real_time_factor>1</real_time_factor>
+      <real_time_update_rate>1000</real_time_update_rate>
+    </physics>
+    <scene>
+      <ambient>0.4 0.4 0.4 1</ambient>
+      <background>0.7 0.7 0.7 1</background>
+      <shadows>1</shadows>
+    </scene>
+    <audio>
+      <device>default</device>
+    </audio>
+    <wind/>
+    <spherical_coordinates>
+      <surface_model>EARTH_WGS84</surface_model>
+      <latitude_deg>0</latitude_deg>
+      <longitude_deg>0</longitude_deg>
+      <elevation>0</elevation>
+      <heading_deg>0</heading_deg>
+    </spherical_coordinates>
+    <model name='robot'>
+      <link name='base_link'>
+        <pose frame=''>0 0 0 0 -0 0</pose>
+        <inertial>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <mass>4</mass>
+          <inertia>
+            <ixx>0.00443333</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>0.00443333</iyy>
+            <iyz>0</iyz>
+            <izz>0.0072</izz>
+          </inertia>
+        </inertial>
+        <collision name='base_link_collision'>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>/home/dualarm/mm-dual-arm-regrasp/catkin_ws/src/ur5/universal_robot/ur_description/meshes/ur5/collision/base.stl</uri>
+            </mesh>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='base_link_visual'>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>/home/dualarm/mm-dual-arm-regrasp/catkin_ws/src/ur5/universal_robot/ur_description/meshes/ur5/visual/base.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <joint name='world_joint' type='fixed'>
+        <child>base_link</child>
+        <parent>world</parent>
+      </joint>
+      <link name='shoulder_link'>
+        <pose frame=''>0 0 0.089159 0 -0 0</pose>
+        <inertial>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <mass>3.7</mass>
+          <inertia>
+            <ixx>0.0102675</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>0.0102675</iyy>
+            <iyz>0</iyz>
+            <izz>0.00666</izz>
+          </inertia>
+        </inertial>
+        <collision name='shoulder_link_collision'>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>/home/dualarm/mm-dual-arm-regrasp/catkin_ws/src/ur5/universal_robot/ur_description/meshes/ur5/collision/shoulder.stl</uri>
+            </mesh>
+          </geometry>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <friction>
+              <ode/>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <bounce/>
+          </surface>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <visual name='shoulder_link_visual'>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>/home/dualarm/mm-dual-arm-regrasp/catkin_ws/src/ur5/universal_robot/ur_description/meshes/ur5/visual/shoulder.dae</uri>
+            </mesh>
+          </geometry>
+          <material>
+            <script>
+              <uri>__default__</uri>
+              <name>__default__</name>
+            </script>
+          </material>
+        </visual>
+        <gravity>1</gravity>
+        <velocity_decay/>
+        <self_collide>1</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <joint name='shoulder_pan_joint' type='revolute'>
+        <child>shoulder_link</child>
+        <parent>base_link</parent>
+        <axis>
+          <xyz>0 0 1</xyz>
+          <limit>
+            <lower>-6.28319</lower>
+            <upper>6.28319</upper>
+            <effort>150</effort>
+            <velocity>3.15</velocity>
+          </limit>
+          <dynamics>
+            <damping>0</damping>
+            <friction>0</friction>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+          <use_parent_model_frame>1</use_parent_model_frame>
+        </axis>
+      </joint>
+      <link name='upper_arm_link'>
+        <pose frame=''>0 0.13585 0.089159 3.14159 1.57079 3.14159</pose>
+        <inertial>
+          <pose frame=''>0 0 0.28 0 -0 0</pose>
+          <mass>8.393</mass>
+          <inertia>
+            <ixx>0.226891</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>0.226891</iyy>
+            <iyz>0</iyz>
+            <izz>0.0151074</izz>
+          </inertia>
+        </inertial>
+        <collision name='upper_arm_link_collision'>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>/home/dualarm/mm-dual-arm-regrasp/catkin_ws/src/ur5/universal_robot/ur_description/meshes/ur5/collision/upperarm.stl</uri>
+            </mesh>
+          </geometry>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <friction>
+              <ode/>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <bounce/>
+          </surface>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <visual name='upper_arm_link_visual'>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>/home/dualarm/mm-dual-arm-regrasp/catkin_ws/src/ur5/universal_robot/ur_description/meshes/ur5/visual/upperarm.dae</uri>
+            </mesh>
+          </geometry>
+          <material>
+            <script>
+              <uri>__default__</uri>
+              <name>__default__</name>
+            </script>
+          </material>
+        </visual>
+        <gravity>1</gravity>
+        <velocity_decay/>
+        <self_collide>1</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <joint name='shoulder_lift_joint' type='revolute'>
+        <child>upper_arm_link</child>
+        <parent>shoulder_link</parent>
+        <axis>
+          <xyz>0 1 0</xyz>
+          <limit>
+            <lower>-6.28319</lower>
+            <upper>6.28319</upper>
+            <effort>150</effort>
+            <velocity>3.15</velocity>
+          </limit>
+          <dynamics>
+            <damping>0</damping>
+            <friction>0</friction>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+          <use_parent_model_frame>1</use_parent_model_frame>
+        </axis>
+      </joint>
+      <link name='forearm_link'>
+        <pose frame=''>0.425 0.01615 0.089159 3.14159 1.57079 3.14159</pose>
+        <inertial>
+          <pose frame=''>0 0 0.196125 0 -0 0</pose>
+          <mass>2.275</mass>
+          <inertia>
+            <ixx>0.0312168</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>0.0312168</iyy>
+            <iyz>0</iyz>
+            <izz>0.004095</izz>
+          </inertia>
+        </inertial>
+        <collision name='forearm_link_collision'>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>/home/dualarm/mm-dual-arm-regrasp/catkin_ws/src/ur5/universal_robot/ur_description/meshes/ur5/collision/forearm.stl</uri>
+            </mesh>
+          </geometry>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <friction>
+              <ode/>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <bounce/>
+          </surface>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <visual name='forearm_link_visual'>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>/home/dualarm/mm-dual-arm-regrasp/catkin_ws/src/ur5/universal_robot/ur_description/meshes/ur5/visual/forearm.dae</uri>
+            </mesh>
+          </geometry>
+          <material>
+            <script>
+              <uri>__default__</uri>
+              <name>__default__</name>
+            </script>
+          </material>
+        </visual>
+        <gravity>1</gravity>
+        <velocity_decay/>
+        <self_collide>1</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <joint name='elbow_joint' type='revolute'>
+        <child>forearm_link</child>
+        <parent>upper_arm_link</parent>
+        <axis>
+          <xyz>0 1 0</xyz>
+          <limit>
+            <lower>-3.14159</lower>
+            <upper>3.14159</upper>
+            <effort>150</effort>
+            <velocity>3.15</velocity>
+          </limit>
+          <dynamics>
+            <damping>0</damping>
+            <friction>0</friction>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+          <use_parent_model_frame>1</use_parent_model_frame>
+        </axis>
+      </joint>
+      <link name='wrist_1_link'>
+        <pose frame=''>0.81725 0.01615 0.089159 3.14159 -0 3.14159</pose>
+        <inertial>
+          <pose frame=''>0 0.093 0 0 -0 0</pose>
+          <mass>1.219</mass>
+          <inertia>
+            <ixx>0.0025599</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>0.0025599</iyy>
+            <iyz>0</iyz>
+            <izz>0.0021942</izz>
+          </inertia>
+        </inertial>
+        <collision name='wrist_1_link_collision'>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>/home/dualarm/mm-dual-arm-regrasp/catkin_ws/src/ur5/universal_robot/ur_description/meshes/ur5/collision/wrist1.stl</uri>
+            </mesh>
+          </geometry>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <friction>
+              <ode/>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <bounce/>
+          </surface>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <visual name='wrist_1_link_visual'>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>/home/dualarm/mm-dual-arm-regrasp/catkin_ws/src/ur5/universal_robot/ur_description/meshes/ur5/visual/wrist1.dae</uri>
+            </mesh>
+          </geometry>
+          <material>
+            <script>
+              <uri>__default__</uri>
+              <name>__default__</name>
+            </script>
+          </material>
+        </visual>
+        <gravity>1</gravity>
+        <velocity_decay/>
+        <self_collide>1</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <joint name='wrist_1_joint' type='revolute'>
+        <child>wrist_1_link</child>
+        <parent>forearm_link</parent>
+        <axis>
+          <xyz>0 1 0</xyz>
+          <limit>
+            <lower>-6.28319</lower>
+            <upper>6.28319</upper>
+            <effort>28</effort>
+            <velocity>3.2</velocity>
+          </limit>
+          <dynamics>
+            <damping>0</damping>
+            <friction>0</friction>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+          <use_parent_model_frame>1</use_parent_model_frame>
+        </axis>
+      </joint>
+      <link name='wrist_2_link'>
+        <pose frame=''>0.81725 0.10915 0.089159 3.14159 -0 3.14159</pose>
+        <inertial>
+          <pose frame=''>0 0 0.09465 0 -0 0</pose>
+          <mass>1.219</mass>
+          <inertia>
+            <ixx>0.0025599</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>0.0025599</iyy>
+            <iyz>0</iyz>
+            <izz>0.0021942</izz>
+          </inertia>
+        </inertial>
+        <collision name='wrist_2_link_collision'>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>/home/dualarm/mm-dual-arm-regrasp/catkin_ws/src/ur5/universal_robot/ur_description/meshes/ur5/collision/wrist2.stl</uri>
+            </mesh>
+          </geometry>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <friction>
+              <ode/>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <bounce/>
+          </surface>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <visual name='wrist_2_link_visual'>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>/home/dualarm/mm-dual-arm-regrasp/catkin_ws/src/ur5/universal_robot/ur_description/meshes/ur5/visual/wrist2.dae</uri>
+            </mesh>
+          </geometry>
+          <material>
+            <script>
+              <uri>__default__</uri>
+              <name>__default__</name>
+            </script>
+          </material>
+        </visual>
+        <gravity>1</gravity>
+        <velocity_decay/>
+        <self_collide>1</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <joint name='wrist_2_joint' type='revolute'>
+        <child>wrist_2_link</child>
+        <parent>wrist_1_link</parent>
+        <axis>
+          <xyz>0 0 -1</xyz>
+          <limit>
+            <lower>-6.28319</lower>
+            <upper>6.28319</upper>
+            <effort>28</effort>
+            <velocity>3.2</velocity>
+          </limit>
+          <dynamics>
+            <damping>0</damping>
+            <friction>0</friction>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+          <use_parent_model_frame>1</use_parent_model_frame>
+        </axis>
+      </joint>
+      <link name='wrist_3_link'>
+        <pose frame=''>0.81725 0.10915 -0.005491 3.14159 -0 3.14159</pose>
+        <inertial>
+          <pose frame=''>0 0.06505 0 1.5708 -0 0</pose>
+          <mass>0.1879</mass>
+          <inertia>
+            <ixx>8.46959e-05</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>8.46959e-05</iyy>
+            <iyz>0</iyz>
+            <izz>0.000132117</izz>
+          </inertia>
+        </inertial>
+        <collision name='wrist_3_link_collision'>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>/home/dualarm/mm-dual-arm-regrasp/catkin_ws/src/ur5/universal_robot/ur_description/meshes/ur5/collision/wrist3.stl</uri>
+            </mesh>
+          </geometry>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <friction>
+              <ode/>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <bounce/>
+          </surface>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <collision name='wrist_3_link_fixed_joint_lump__ee_link_collision_1'>
+          <pose frame=''>-0 0.0723 0 0 -0 1.5708</pose>
+          <geometry>
+            <box>
+              <size>0.01 0.01 0.01</size>
+            </box>
+          </geometry>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <friction>
+              <ode/>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <bounce/>
+          </surface>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <visual name='wrist_3_link_visual'>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>/home/dualarm/mm-dual-arm-regrasp/catkin_ws/src/ur5/universal_robot/ur_description/meshes/ur5/visual/wrist3.dae</uri>
+            </mesh>
+          </geometry>
+          <material>
+            <script>
+              <uri>__default__</uri>
+              <name>__default__</name>
+            </script>
+          </material>
+        </visual>
+        <velocity_decay/>
+        <gravity>1</gravity>
+        <velocity_decay/>
+        <self_collide>1</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <joint name='wrist_3_joint' type='revolute'>
+        <child>wrist_3_link</child>
+        <parent>wrist_2_link</parent>
+        <axis>
+          <xyz>0 1 0</xyz>
+          <limit>
+            <lower>-6.28319</lower>
+            <upper>6.28319</upper>
+            <effort>28</effort>
+            <velocity>3.2</velocity>
+          </limit>
+          <dynamics>
+            <damping>0</damping>
+            <friction>0</friction>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+          <use_parent_model_frame>1</use_parent_model_frame>
+        </axis>
+      </joint>
+      <static>0</static>
+      <plugin name='ros_control' filename='libgazebo_ros_control.so'>
+        <robotNamespace>/</robotNamespace>
+      </plugin>
+      <pose frame=''>0 0 0.1 0 -0 0</pose>
+    </model>
+    <model name='vx300s'>
+      <link name='vx300s/base_link'>
+        <pose frame=''>0 0 0 0 -0 0</pose>
+        <inertial>
+          <pose frame=''>-0.053477 -0.000563 0.020596 0 -0 1.5708</pose>
+          <mass>0.969034</mass>
+          <inertia>
+            <ixx>0.006024</ixx>
+            <ixy>4.713e-05</ixy>
+            <ixz>3.851e-06</ixz>
+            <iyy>0.0017</iyy>
+            <iyz>-8.415e-05</iyz>
+            <izz>0.007162</izz>
+          </inertia>
+        </inertial>
+        <collision name='vx300s/base_link_collision'>
+          <pose frame=''>0 0 0 0 -0 1.5708</pose>
+          <geometry>
+            <mesh>
+              <scale>0.001 0.001 0.001</scale>
+              <uri>/home/dualarm/mm-dual-arm-regrasp/catkin_ws/src/interbotix_ros_arms/interbotix_descriptions/meshes/meshes_vx300s/VXSA-300-M-1-Base.stl</uri>
+            </mesh>
+          </geometry>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <friction>
+              <ode/>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <bounce/>
+          </surface>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <visual name='vx300s/base_link_visual'>
+          <pose frame=''>0 0 0 0 -0 1.5708</pose>
+          <geometry>
+            <mesh>
+              <scale>0.001 0.001 0.001</scale>
+              <uri>/home/dualarm/mm-dual-arm-regrasp/catkin_ws/src/interbotix_ros_arms/interbotix_descriptions/meshes/meshes_vx300s/VXSA-300-M-1-Base.stl</uri>
+            </mesh>
+          </geometry>
+          <material>
+            <script>
+              <name>Custom/Interbotix</name>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+            </script>
+          </material>
+        </visual>
+        <gravity>1</gravity>
+        <velocity_decay/>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <joint name='fixed' type='fixed'>
+        <child>vx300s/base_link</child>
+        <parent>world</parent>
+      </joint>
+      <link name='vx300s/shoulder_link'>
+        <pose frame=''>0 0 0.0787 0 -0 0</pose>
+        <inertial>
+          <pose frame=''>0.000259 -3e-06 0.011613 0 -0 1.5708</pose>
+          <mass>0.798614</mass>
+          <inertia>
+            <ixx>0.0009388</ixx>
+            <ixy>-1e-09</ixy>
+            <ixz>-1.91e-08</ixz>
+            <iyy>0.001138</iyy>
+            <iyz>5.9568e-06</iyz>
+            <izz>0.001201</izz>
+          </inertia>
+        </inertial>
+        <collision name='vx300s/shoulder_link_collision'>
+          <pose frame=''>0 0 -0.003 0 -0 1.5708</pose>
+          <geometry>
+            <mesh>
+              <scale>0.001 0.001 0.001</scale>
+              <uri>/home/dualarm/mm-dual-arm-regrasp/catkin_ws/src/interbotix_ros_arms/interbotix_descriptions/meshes/meshes_vx300s/VXSA-300-M-2-Shoulder.stl</uri>
+            </mesh>
+          </geometry>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <friction>
+              <ode/>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <bounce/>
+          </surface>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <visual name='vx300s/shoulder_link_visual'>
+          <pose frame=''>0 0 -0.003 0 -0 1.5708</pose>
+          <geometry>
+            <mesh>
+              <scale>0.001 0.001 0.001</scale>
+              <uri>/home/dualarm/mm-dual-arm-regrasp/catkin_ws/src/interbotix_ros_arms/interbotix_descriptions/meshes/meshes_vx300s/VXSA-300-M-2-Shoulder.stl</uri>
+            </mesh>
+          </geometry>
+          <material>
+            <script>
+              <name>Custom/Interbotix</name>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+            </script>
+          </material>
+        </visual>
+        <gravity>1</gravity>
+        <velocity_decay/>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <joint name='waist' type='revolute'>
+        <child>vx300s/shoulder_link</child>
+        <parent>vx300s/base_link</parent>
+        <axis>
+          <xyz>0 0 1</xyz>
+          <limit>
+            <lower>-3.14159</lower>
+            <upper>3.14159</upper>
+            <effort>100</effort>
+            <velocity>3.14159</velocity>
+          </limit>
+          <dynamics>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+          <use_parent_model_frame>1</use_parent_model_frame>
+        </axis>
+      </joint>
+      <link name='vx300s/upper_arm_link'>
+        <pose frame=''>0 0 0.12675 0 -0 0</pose>
+        <inertial>
+          <pose frame=''>0.020695 0 0.226459 0 -0 1.5708</pose>
+          <mass>0.792592</mass>
+          <inertia>
+            <ixx>0.008925</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>0.008937</iyy>
+            <iyz>0.001201</iyz>
+            <izz>0.0009357</izz>
+          </inertia>
+        </inertial>
+        <collision name='vx300s/upper_arm_link_collision'>
+          <pose frame=''>0 0 0 0 -0 1.5708</pose>
+          <geometry>
+            <mesh>
+              <scale>0.001 0.001 0.001</scale>
+              <uri>/home/dualarm/mm-dual-arm-regrasp/catkin_ws/src/interbotix_ros_arms/interbotix_descriptions/meshes/meshes_vx300s/VXSA-300-M-3-UA.stl</uri>
+            </mesh>
+          </geometry>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <friction>
+              <ode/>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <bounce/>
+          </surface>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <visual name='vx300s/upper_arm_link_visual'>
+          <pose frame=''>0 0 0 0 -0 1.5708</pose>
+          <geometry>
+            <mesh>
+              <scale>0.001 0.001 0.001</scale>
+              <uri>/home/dualarm/mm-dual-arm-regrasp/catkin_ws/src/interbotix_ros_arms/interbotix_descriptions/meshes/meshes_vx300s/VXSA-300-M-3-UA.stl</uri>
+            </mesh>
+          </geometry>
+          <material>
+            <script>
+              <name>Custom/Interbotix</name>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+            </script>
+          </material>
+        </visual>
+        <gravity>1</gravity>
+        <velocity_decay/>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <joint name='shoulder' type='revolute'>
+        <child>vx300s/upper_arm_link</child>
+        <parent>vx300s/shoulder_link</parent>
+        <axis>
+          <xyz>0 1 0</xyz>
+          <limit>
+            <lower>-1.85005</lower>
+            <upper>1.76278</upper>
+            <effort>100</effort>
+            <velocity>3.14159</velocity>
+          </limit>
+          <dynamics>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+          <use_parent_model_frame>1</use_parent_model_frame>
+        </axis>
+      </joint>
+      <link name='vx300s/upper_forearm_link'>
+        <pose frame=''>0.05955 0 0.42675 -3.14159 -0 0</pose>
+        <inertial>
+          <pose frame=''>0.105723 0 0 0 -0 0</pose>
+          <mass>0.322228</mass>
+          <inertia>
+            <ixx>0.0001524</ixx>
+            <ixy>-1.883e-05</ixy>
+            <ixz>-8.4064e-06</ixz>
+            <iyy>0.001342</iyy>
+            <iyz>1.2564e-06</iyz>
+            <izz>0.001441</izz>
+          </inertia>
+        </inertial>
+        <collision name='vx300s/upper_forearm_link_collision'>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>0.001 0.001 0.001</scale>
+              <uri>/home/dualarm/mm-dual-arm-regrasp/catkin_ws/src/interbotix_ros_arms/interbotix_descriptions/meshes/meshes_vx300s/VXSA-300-M-4-UF.stl</uri>
+            </mesh>
+          </geometry>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <friction>
+              <ode/>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <bounce/>
+          </surface>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <visual name='vx300s/upper_forearm_link_visual'>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>0.001 0.001 0.001</scale>
+              <uri>/home/dualarm/mm-dual-arm-regrasp/catkin_ws/src/interbotix_ros_arms/interbotix_descriptions/meshes/meshes_vx300s/VXSA-300-M-4-UF.stl</uri>
+            </mesh>
+          </geometry>
+          <material>
+            <script>
+              <name>Custom/Interbotix</name>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+            </script>
+          </material>
+        </visual>
+        <gravity>1</gravity>
+        <velocity_decay/>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <joint name='elbow' type='revolute'>
+        <child>vx300s/upper_forearm_link</child>
+        <parent>vx300s/upper_arm_link</parent>
+        <axis>
+          <xyz>0 -1 -0</xyz>
+          <limit>
+            <lower>-1.6057</lower>
+            <upper>1.76278</upper>
+            <effort>100</effort>
+            <velocity>3.14159</velocity>
+          </limit>
+          <dynamics>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+          <use_parent_model_frame>1</use_parent_model_frame>
+        </axis>
+      </joint>
+      <link name='vx300s/lower_forearm_link'>
+        <pose frame=''>0.25955 0 0.42675 -3.14159 -0 0</pose>
+        <inertial>
+          <pose frame=''>0.051348 -0.006805 0 0 -0 0</pose>
+          <mass>0.414823</mass>
+          <inertia>
+            <ixx>0.0001753</ixx>
+            <ixy>-8.528e-05</ixy>
+            <ixz>0</ixz>
+            <iyy>0.0005269</iyy>
+            <iyz>0</iyz>
+            <izz>0.0005911</izz>
+          </inertia>
+        </inertial>
+        <collision name='vx300s/lower_forearm_link_collision'>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>0.001 0.001 0.001</scale>
+              <uri>/home/dualarm/mm-dual-arm-regrasp/catkin_ws/src/interbotix_ros_arms/interbotix_descriptions/meshes/meshes_vx300s/VXSA-300-M-5-LF.stl</uri>
+            </mesh>
+          </geometry>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <friction>
+              <ode/>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <bounce/>
+          </surface>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <visual name='vx300s/lower_forearm_link_visual'>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>0.001 0.001 0.001</scale>
+              <uri>/home/dualarm/mm-dual-arm-regrasp/catkin_ws/src/interbotix_ros_arms/interbotix_descriptions/meshes/meshes_vx300s/VXSA-300-M-5-LF.stl</uri>
+            </mesh>
+          </geometry>
+          <material>
+            <script>
+              <name>Custom/Interbotix</name>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+            </script>
+          </material>
+        </visual>
+        <gravity>1</gravity>
+        <velocity_decay/>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <joint name='forearm_roll' type='revolute'>
+        <child>vx300s/lower_forearm_link</child>
+        <parent>vx300s/upper_forearm_link</parent>
+        <axis>
+          <xyz>1 0 0</xyz>
+          <limit>
+            <lower>-3.14159</lower>
+            <upper>3.14159</upper>
+            <effort>100</effort>
+            <velocity>3.14159</velocity>
+          </limit>
+          <dynamics>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+          <use_parent_model_frame>1</use_parent_model_frame>
+        </axis>
+      </joint>
+      <link name='vx300s/wrist_link'>
+        <pose frame=''>0.35955 0 0.42675 -3.14159 -0 0</pose>
+        <inertial>
+          <pose frame=''>0.046743 8e-06 -0.010565 -3.14159 -0 -1.5708</pose>
+          <mass>0.115395</mass>
+          <inertia>
+            <ixx>4.631e-05</ixx>
+            <ixy>1.95e-08</ixy>
+            <ixz>2.3e-09</ixz>
+            <iyy>4.514e-05</iyy>
+            <iyz>4.2002e-06</iyz>
+            <izz>5.27e-05</izz>
+          </inertia>
+        </inertial>
+        <collision name='vx300s/wrist_link_collision'>
+          <pose frame=''>0 0 0 -3.14159 -0 -1.5708</pose>
+          <geometry>
+            <mesh>
+              <scale>0.001 0.001 0.001</scale>
+              <uri>/home/dualarm/mm-dual-arm-regrasp/catkin_ws/src/interbotix_ros_arms/interbotix_descriptions/meshes/meshes_vx300s/VXSA-300-M-6-Wrist.stl</uri>
+            </mesh>
+          </geometry>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <friction>
+              <ode/>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <bounce/>
+          </surface>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <visual name='vx300s/wrist_link_visual'>
+          <pose frame=''>0 0 0 -3.14159 -0 -1.5708</pose>
+          <geometry>
+            <mesh>
+              <scale>0.001 0.001 0.001</scale>
+              <uri>/home/dualarm/mm-dual-arm-regrasp/catkin_ws/src/interbotix_ros_arms/interbotix_descriptions/meshes/meshes_vx300s/VXSA-300-M-6-Wrist.stl</uri>
+            </mesh>
+          </geometry>
+          <material>
+            <script>
+              <name>Custom/Interbotix</name>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+            </script>
+          </material>
+        </visual>
+        <gravity>1</gravity>
+        <velocity_decay/>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <joint name='wrist_angle' type='revolute'>
+        <child>vx300s/wrist_link</child>
+        <parent>vx300s/lower_forearm_link</parent>
+        <axis>
+          <xyz>0 -1 -0</xyz>
+          <limit>
+            <lower>-2.26893</lower>
+            <upper>1.8675</upper>
+            <effort>100</effort>
+            <velocity>3.14159</velocity>
+          </limit>
+          <dynamics>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+          <use_parent_model_frame>1</use_parent_model_frame>
+        </axis>
+      </joint>
+      <link name='vx300s/gripper_link'>
+        <pose frame=''>0.429294 0 0.42675 0 -0 0</pose>
+        <inertial>
+          <pose frame=''>0.023001 0 0.011523 0 -0 1.5708</pose>
+          <mass>0.097666</mass>
+          <inertia>
+            <ixx>3.268e-05</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>2.436e-05</iyy>
+            <iyz>2.785e-07</iyz>
+            <izz>2.119e-05</izz>
+          </inertia>
+        </inertial>
+        <collision name='vx300s/gripper_link_collision'>
+          <pose frame=''>-0.02 0 0 0 -0 1.5708</pose>
+          <geometry>
+            <mesh>
+              <scale>0.001 0.001 0.001</scale>
+              <uri>/home/dualarm/mm-dual-arm-regrasp/catkin_ws/src/interbotix_ros_arms/interbotix_descriptions/meshes/meshes_vx300s/VXSA-300-M-7-Gripper.stl</uri>
+            </mesh>
+          </geometry>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <friction>
+              <ode/>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <bounce/>
+          </surface>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <visual name='vx300s/gripper_link_visual'>
+          <pose frame=''>-0.02 0 0 0 -0 1.5708</pose>
+          <geometry>
+            <mesh>
+              <scale>0.001 0.001 0.001</scale>
+              <uri>/home/dualarm/mm-dual-arm-regrasp/catkin_ws/src/interbotix_ros_arms/interbotix_descriptions/meshes/meshes_vx300s/VXSA-300-M-7-Gripper.stl</uri>
+            </mesh>
+          </geometry>
+          <material>
+            <script>
+              <name>Custom/Interbotix</name>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+            </script>
+          </material>
+        </visual>
+        <gravity>1</gravity>
+        <velocity_decay/>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <joint name='wrist_rotate' type='revolute'>
+        <child>vx300s/gripper_link</child>
+        <parent>vx300s/wrist_link</parent>
+        <axis>
+          <xyz>1 0 0</xyz>
+          <limit>
+            <lower>-3.14159</lower>
+            <upper>3.14159</upper>
+            <effort>100</effort>
+            <velocity>3.14159</velocity>
+          </limit>
+          <dynamics>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+          <use_parent_model_frame>1</use_parent_model_frame>
+        </axis>
+      </joint>
+      <link name='vx300s/ee_arm_link'>
+        <pose frame=''>0.472119 0 0.42675 0 -0 0</pose>
+        <inertial>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <mass>0.001</mass>
+          <inertia>
+            <ixx>0.0001</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>0.0001</iyy>
+            <iyz>0</iyz>
+            <izz>0.0001</izz>
+          </inertia>
+        </inertial>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <joint name='ee_arm' type='revolute'>
+        <child>vx300s/ee_arm_link</child>
+        <parent>vx300s/gripper_link</parent>
+        <axis>
+          <limit>
+            <lower>0</lower>
+            <upper>0</upper>
+          </limit>
+          <dynamics>
+            <damping>0</damping>
+            <friction>0</friction>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+          <use_parent_model_frame>1</use_parent_model_frame>
+          <xyz>0 0 1</xyz>
+        </axis>
+        <physics>
+          <ode>
+            <limit>
+              <cfm>0</cfm>
+              <erp>0.2</erp>
+            </limit>
+          </ode>
+        </physics>
+      </joint>
+      <link name='vx300s/gripper_prop_link'>
+        <pose frame=''>0.477794 0 0.42675 0 -0 0</pose>
+        <inertial>
+          <pose frame=''>0.002378 0 0 0 -0 1.5708</pose>
+          <mass>0.008009</mass>
+          <inertia>
+            <ixx>2.0386e-06</ixx>
+            <ixy>0</ixy>
+            <ixz>6.559e-07</ixz>
+            <iyy>4.2979e-06</iyy>
+            <iyz>0</iyz>
+            <izz>2.3796e-06</izz>
+          </inertia>
+        </inertial>
+        <collision name='vx300s/gripper_prop_link_collision'>
+          <pose frame=''>-0.0685 0 0 0 -0 1.5708</pose>
+          <geometry>
+            <mesh>
+              <scale>0.001 0.001 0.001</scale>
+              <uri>/home/dualarm/mm-dual-arm-regrasp/catkin_ws/src/interbotix_ros_arms/interbotix_descriptions/meshes/meshes_vx300s/VXSA-300-M-8-Gripper-Prop.stl</uri>
+            </mesh>
+          </geometry>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <friction>
+              <ode/>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <bounce/>
+          </surface>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <visual name='vx300s/gripper_prop_link_visual'>
+          <pose frame=''>-0.0685 0 0 0 -0 1.5708</pose>
+          <geometry>
+            <mesh>
+              <scale>0.001 0.001 0.001</scale>
+              <uri>/home/dualarm/mm-dual-arm-regrasp/catkin_ws/src/interbotix_ros_arms/interbotix_descriptions/meshes/meshes_vx300s/VXSA-300-M-8-Gripper-Prop.stl</uri>
+            </mesh>
+          </geometry>
+          <material>
+            <script>
+              <name>Custom/Interbotix</name>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+            </script>
+          </material>
+        </visual>
+        <gravity>1</gravity>
+        <velocity_decay>
+          <linear>1</linear>
+          <angular>1</angular>
+        </velocity_decay>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <joint name='gripper' type='revolute'>
+        <child>vx300s/gripper_prop_link</child>
+        <parent>vx300s/ee_arm_link</parent>
+        <axis>
+          <xyz>1 0 0</xyz>
+          <limit>
+            <lower>-1e+16</lower>
+            <upper>1e+16</upper>
+          </limit>
+          <dynamics>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+          <use_parent_model_frame>1</use_parent_model_frame>
+        </axis>
+      </joint>
+      <link name='vx300s/gripper_bar_link'>
+        <pose frame=''>0.472119 0 0.42675 0 -0 0</pose>
+        <inertial>
+          <pose frame=''>0.006794 -0 -0.000776 0 -0 1.5708</pose>
+          <mass>0.150986</mass>
+          <inertia>
+            <ixx>7.895e-05</ixx>
+            <ixy>-1.2e-09</ixy>
+            <ixz>1.341e-07</ixz>
+            <iyy>0.0003283</iyy>
+            <iyz>1.7465e-06</iyz>
+            <izz>0.0003095</izz>
+          </inertia>
+        </inertial>
+        <collision name='vx300s/gripper_bar_link_collision'>
+          <pose frame=''>-0.063 0 0 0 -0 1.5708</pose>
+          <geometry>
+            <mesh>
+              <scale>0.001 0.001 0.001</scale>
+              <uri>/home/dualarm/mm-dual-arm-regrasp/catkin_ws/src/interbotix_ros_arms/interbotix_descriptions/meshes/meshes_vx300s/VXSA-300-M-9-Gripper-Bar.stl</uri>
+            </mesh>
+          </geometry>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <friction>
+              <ode/>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <bounce/>
+          </surface>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <visual name='vx300s/gripper_bar_link_visual'>
+          <pose frame=''>-0.063 0 0 0 -0 1.5708</pose>
+          <geometry>
+            <mesh>
+              <scale>0.001 0.001 0.001</scale>
+              <uri>/home/dualarm/mm-dual-arm-regrasp/catkin_ws/src/interbotix_ros_arms/interbotix_descriptions/meshes/meshes_vx300s/VXSA-300-M-9-Gripper-Bar.stl</uri>
+            </mesh>
+          </geometry>
+          <material>
+            <script>
+              <name>Custom/Interbotix</name>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+            </script>
+          </material>
+        </visual>
+        <gravity>1</gravity>
+        <velocity_decay/>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <joint name='gripper_bar' type='revolute'>
+        <child>vx300s/gripper_bar_link</child>
+        <parent>vx300s/ee_arm_link</parent>
+        <axis>
+          <limit>
+            <lower>0</lower>
+            <upper>0</upper>
+          </limit>
+          <dynamics>
+            <damping>0</damping>
+            <friction>0</friction>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+          <use_parent_model_frame>1</use_parent_model_frame>
+          <xyz>0 0 1</xyz>
+        </axis>
+        <physics>
+          <ode>
+            <limit>
+              <cfm>0</cfm>
+              <erp>0.2</erp>
+            </limit>
+          </ode>
+        </physics>
+      </joint>
+      <link name='vx300s/fingers_link'>
+        <pose frame=''>0.497994 0 0.42675 0 -0 0</pose>
+        <inertial>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <mass>0.001</mass>
+          <inertia>
+            <ixx>0.0001</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>0.0001</iyy>
+            <iyz>0</iyz>
+            <izz>0.0001</izz>
+          </inertia>
+        </inertial>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <joint name='ee_bar' type='revolute'>
+        <child>vx300s/fingers_link</child>
+        <parent>vx300s/gripper_bar_link</parent>
+        <axis>
+          <limit>
+            <lower>0</lower>
+            <upper>0</upper>
+          </limit>
+          <dynamics>
+            <damping>0</damping>
+            <friction>0</friction>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+          <use_parent_model_frame>1</use_parent_model_frame>
+          <xyz>0 0 1</xyz>
+        </axis>
+        <physics>
+          <ode>
+            <limit>
+              <cfm>0</cfm>
+              <erp>0.2</erp>
+            </limit>
+          </ode>
+        </physics>
+      </joint>
+      <link name='vx300s/ee_gripper_link'>
+        <pose frame=''>0.536494 0 0.42675 0 -0 0</pose>
+        <inertial>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <mass>0.001</mass>
+          <inertia>
+            <ixx>0.0001</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>0.0001</iyy>
+            <iyz>0</iyz>
+            <izz>0.0001</izz>
+          </inertia>
+        </inertial>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <joint name='ee_gripper' type='revolute'>
+        <child>vx300s/ee_gripper_link</child>
+        <parent>vx300s/fingers_link</parent>
+        <axis>
+          <limit>
+            <lower>0</lower>
+            <upper>0</upper>
+          </limit>
+          <dynamics>
+            <damping>0</damping>
+            <friction>0</friction>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+          <use_parent_model_frame>1</use_parent_model_frame>
+          <xyz>0 0 1</xyz>
+        </axis>
+        <physics>
+          <ode>
+            <limit>
+              <cfm>0</cfm>
+              <erp>0.2</erp>
+            </limit>
+          </ode>
+        </physics>
+      </joint>
+      <link name='vx300s/left_finger_link'>
+        <pose frame=''>0.497994 0 0.42675 0 -0 0</pose>
+        <inertial>
+          <pose frame=''>0.017344 -0.006069 0 0 -0 -1.5708</pose>
+          <mass>0.034796</mass>
+          <inertia>
+            <ixx>2.433e-05</ixx>
+            <ixy>-2.4004e-06</ixy>
+            <ixz>0</ixz>
+            <iyy>1.255e-05</iyy>
+            <iyz>0</iyz>
+            <izz>1.417e-05</izz>
+          </inertia>
+        </inertial>
+        <collision name='vx300s/left_finger_link_collision'>
+          <pose frame=''>-0.0404 -0.0575 0 -1.5708 -0 -1.5708</pose>
+          <geometry>
+            <mesh>
+              <scale>0.001 0.001 0.001</scale>
+              <uri>/home/dualarm/mm-dual-arm-regrasp/catkin_ws/src/interbotix_ros_arms/interbotix_descriptions/meshes/meshes_vx300s/VXSA-300-M-10-Finger.stl</uri>
+            </mesh>
+          </geometry>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <friction>
+              <ode/>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <bounce/>
+          </surface>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <visual name='vx300s/left_finger_link_visual'>
+          <pose frame=''>-0.0404 -0.0575 0 -1.5708 -0 -1.5708</pose>
+          <geometry>
+            <mesh>
+              <scale>0.001 0.001 0.001</scale>
+              <uri>/home/dualarm/mm-dual-arm-regrasp/catkin_ws/src/interbotix_ros_arms/interbotix_descriptions/meshes/meshes_vx300s/VXSA-300-M-10-Finger.stl</uri>
+            </mesh>
+          </geometry>
+          <material>
+            <script>
+              <name>Custom/Interbotix</name>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+            </script>
+          </material>
+        </visual>
+        <gravity>1</gravity>
+        <velocity_decay/>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <joint name='left_finger' type='prismatic'>
+        <child>vx300s/left_finger_link</child>
+        <parent>vx300s/fingers_link</parent>
+        <axis>
+          <xyz>0 1 0</xyz>
+          <limit>
+            <lower>0.021</lower>
+            <upper>0.057</upper>
+            <effort>10</effort>
+            <velocity>1</velocity>
+          </limit>
+          <dynamics>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+          <use_parent_model_frame>1</use_parent_model_frame>
+        </axis>
+      </joint>
+      <link name='vx300s/right_finger_link'>
+        <pose frame=''>0.497994 0 0.42675 0 -0 0</pose>
+        <inertial>
+          <pose frame=''>0.017344 0.006069 0 -3.14159 -0 -1.5708</pose>
+          <mass>0.034796</mass>
+          <inertia>
+            <ixx>2.433e-05</ixx>
+            <ixy>2.4001e-06</ixy>
+            <ixz>0</ixz>
+            <iyy>1.255e-05</iyy>
+            <iyz>0</iyz>
+            <izz>1.417e-05</izz>
+          </inertia>
+        </inertial>
+        <collision name='vx300s/right_finger_link_collision'>
+          <pose frame=''>-0.0404 0.0575 0 1.5708 -0 1.5708</pose>
+          <geometry>
+            <mesh>
+              <scale>0.001 0.001 0.001</scale>
+              <uri>/home/dualarm/mm-dual-arm-regrasp/catkin_ws/src/interbotix_ros_arms/interbotix_descriptions/meshes/meshes_vx300s/VXSA-300-M-10-Finger.stl</uri>
+            </mesh>
+          </geometry>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <friction>
+              <ode/>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <bounce/>
+          </surface>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <visual name='vx300s/right_finger_link_visual'>
+          <pose frame=''>-0.0404 0.0575 0 1.5708 -0 1.5708</pose>
+          <geometry>
+            <mesh>
+              <scale>0.001 0.001 0.001</scale>
+              <uri>/home/dualarm/mm-dual-arm-regrasp/catkin_ws/src/interbotix_ros_arms/interbotix_descriptions/meshes/meshes_vx300s/VXSA-300-M-10-Finger.stl</uri>
+            </mesh>
+          </geometry>
+          <material>
+            <script>
+              <name>Custom/Interbotix</name>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+            </script>
+          </material>
+        </visual>
+        <gravity>1</gravity>
+        <velocity_decay/>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <joint name='right_finger' type='prismatic'>
+        <child>vx300s/right_finger_link</child>
+        <parent>vx300s/fingers_link</parent>
+        <axis>
+          <xyz>0 1 0</xyz>
+          <limit>
+            <lower>-0.057</lower>
+            <upper>-0.021</upper>
+            <effort>10</effort>
+            <velocity>1</velocity>
+          </limit>
+          <dynamics>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+          <use_parent_model_frame>1</use_parent_model_frame>
+        </axis>
+      </joint>
+      <static>0</static>
+      <plugin name='gazebo_ros_control' filename='libgazebo_ros_control.so'>
+        <robotSimType>gazebo_ros_control/DefaultRobotHWSim</robotSimType>
+        <legacyModeNS>1</legacyModeNS>
+        <robotNamespace>/vx300s/</robotNamespace>
+      </plugin>
+      <pose frame=''>0.8 0 0.1 0 -0 3.14</pose>
+    </model>
+    <state world_name='default'>
+      <sim_time>129 999000000</sim_time>
+      <real_time>133 133383813</real_time>
+      <wall_time>1625599602 285261123</wall_time>
+      <iterations>129999</iterations>
+      <model name='ground_plane'>
+        <pose frame=''>0 0 0 0 -0 0</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='robot'>
+        <pose frame=''>0 -0 0.1 3.7e-05 2e-05 2e-06</pose>
+        <scale>1 1 1</scale>
+        <link name='base_link'>
+          <pose frame=''>0 -0 0.1 3.7e-05 2e-05 2e-06</pose>
+          <velocity>-0 -0 -0 0 -0 0</velocity>
+          <acceleration>-0 -1e-06 -1e-06 -0.000139 0.000514 8.4e-05</acceleration>
+          <wrench>-2e-06 -3e-06 -5e-06 0 -0 0</wrench>
+        </link>
+        <link name='forearm_link'>
+          <pose frame=''>-0.217369 0.016201 0.554365 -0.00026 1.01412 -0.000237</pose>
+          <velocity>-0.001959 0.000196 -0.001174 0 -0.005729 -0.000901</velocity>
+          <acceleration>-0.000109 -4.8e-05 9.3e-05 0.000385 -0.000269 0.00014</acceleration>
+          <wrench>-0.000248 -0.00011 0.000212 0 -0 0</wrench>
+        </link>
+        <link name='shoulder_link'>
+          <pose frame=''>1e-06 -2e-06 0.189159 -7.5e-05 -4.1e-05 -1.3e-05</pose>
+          <velocity>0 0 0 0 -0 -0.000902</velocity>
+          <acceleration>5.7e-05 3.2e-05 1e-06 0.000177 -0.000925 -7.3e-05</acceleration>
+          <wrench>0.000212 0.000117 5e-06 0 -0 0</wrench>
+        </link>
+        <link name='upper_arm_link'>
+          <pose frame=''>2e-06 0.135848 0.189145 -0.000154 -0.536874 6.2e-05</pose>
+          <velocity>0.000123 0 0 0 -0.005403 -0.000901</velocity>
+          <acceleration>-2e-06 1.7e-05 2.3e-05 0.002376 -0.000285 -0.003237</acceleration>
+          <wrench>-1.4e-05 0.000139 0.000189 0 -0 0</wrench>
+        </link>
+        <link name='wrist_1_link'>
+          <pose frame=''>0.115655 0.016225 0.761617 -0.000257 0.994201 -0.000234</pose>
+          <velocity>-0.003146 -0.000104 0.000733 0 -0.00558 -0.000901</velocity>
+          <acceleration>-0.000114 -8.6e-05 8.2e-05 1.8e-05 -0.000272 -0.000212</acceleration>
+          <wrench>-0.000139 -0.000105 0.0001 0 -0 0</wrench>
+        </link>
+        <link name='wrist_2_link'>
+          <pose frame=''>0.115657 0.109225 0.761603 -0.994116 -0.016842 -1.58168</pose>
+          <velocity>-0.003062 -0.000104 0.000733 -7.6e-05 -0.00558 -0.00095</velocity>
+          <acceleration>-0.000115 -7e-05 0.000118 -5.3e-05 -0.000341 -0.000117</acceleration>
+          <wrench>-0.000141 -8.5e-05 0.000144 0 -0 0</wrench>
+        </link>
+        <link name='wrist_3_link'>
+          <pose frame=''>0.195004 0.109231 0.813202 -0.994111 -0.016851 -1.58167</pose>
+          <velocity>-0.00335 -0.000176 0.001176 -5.6e-05 -0.005581 -0.000981</velocity>
+          <acceleration>-9.2e-05 -5e-05 0.000138 -0.000166 -0.000462 -0.000164</acceleration>
+          <wrench>-1.7e-05 -9e-06 2.6e-05 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='vx300s'>
+        <pose frame=''>0.8 0 0.1 0 -0 3.14</pose>
+        <scale>1 1 1</scale>
+        <link name='vx300s/base_link'>
+          <pose frame=''>0.8 0 0.1 0 -0 3.14</pose>
+          <velocity>-0 -0 -0 -3e-06 -0 -0</velocity>
+          <acceleration>0 8.7e-05 0 -0.008714 1.5e-05 -0.000833</acceleration>
+          <wrench>0 8.4e-05 0 0 -0 0</wrench>
+        </link>
+        <link name='vx300s/ee_arm_link'>
+          <pose frame=''>0.719152 0.000155 0.224943 -0.0005 0.598957 3.13972</pose>
+          <velocity>2e-06 2.3e-05 -1e-06 -0.000841 -1.9e-05 0.001216</velocity>
+          <acceleration>0.010349 0.134629 0.004188 -2.17514 -0.051815 -3.12608</acceleration>
+          <wrench>1e-05 0.000135 4e-06 0 -0 0</wrench>
+        </link>
+        <link name='vx300s/ee_gripper_link'>
+          <pose frame=''>0.665958 0.000255 0.188582 -0.000503 0.598939 3.13972</pose>
+          <velocity>-3.4e-05 2.9e-05 -2.1e-05 3.3e-05 -1.6e-05 -6.7e-05</velocity>
+          <acceleration>-0.051205 0.002233 -0.033607 -0.865048 -0.051015 1.23794</acceleration>
+          <wrench>-5.1e-05 2e-06 -3.4e-05 0 -0 0</wrench>
+        </link>
+        <link name='vx300s/fingers_link'>
+          <pose frame=''>0.697766 0.000195 0.21031 -0.0005 0.598945 3.13972</pose>
+          <velocity>1e-05 -1.5e-05 6e-06 0.000609 -1.8e-05 -0.000909</velocity>
+          <acceleration>0.005597 -0.041317 0.001564 0.565642 -0.05328 -0.856032</acceleration>
+          <wrench>6e-06 -4.1e-05 2e-06 0 -0 0</wrench>
+        </link>
+        <link name='vx300s/gripper_bar_link'>
+          <pose frame=''>0.719135 0.000155 0.224892 -0.000501 0.598951 3.13972</pose>
+          <velocity>-0 -1.2e-05 -0 -5.4e-05 -1.9e-05 6.2e-05</velocity>
+          <acceleration>-0.008456 -0.015166 -0.005472 -0.822407 -0.051155 1.09598</acceleration>
+          <wrench>-0.001277 -0.00229 -0.000826 0 -0 0</wrench>
+        </link>
+        <link name='vx300s/gripper_link'>
+          <pose frame=''>0.754517 8.9e-05 0.249071 -0.000499 0.598969 3.13973</pose>
+          <velocity>1e-06 8e-06 1e-06 8e-05 -2.2e-05 -8.8e-05</velocity>
+          <acceleration>0.004622 0.075813 0.0028 1.92438 -0.128857 2.34174</acceleration>
+          <wrench>0.000451 0.007404 0.000273 0 -0 0</wrench>
+        </link>
+        <link name='vx300s/gripper_prop_link'>
+          <pose frame=''>0.714443 0.000164 0.221673 -0.075565 0.598948 3.13972</pose>
+          <velocity>3e-06 -3.3e-05 2e-06 -0.000799 -1.6e-05 0.001158</velocity>
+          <acceleration>-0.010723 -0.088737 -0.00583 -0.574935 0.543346 0.969858</acceleration>
+          <wrench>-8.6e-05 -0.000711 -4.7e-05 0 -0 0</wrench>
+        </link>
+        <link name='vx300s/left_finger_link'>
+          <pose frame=''>0.697668 -0.055874 0.210266 -0.000526 0.598947 3.13971</pose>
+          <velocity>-7.5e-05 -2.1e-05 -4.8e-05 0.000669 -2.2e-05 -0.000998</velocity>
+          <acceleration>-0.073233 0.000918 -0.047815 0.596219 0.021914 -1.06976</acceleration>
+          <wrench>-0.002548 3.2e-05 -0.001664 0 -0 0</wrench>
+        </link>
+        <link name='vx300s/lower_forearm_link'>
+          <pose frame=''>0.910031 -0.000167 0.268058 3.14119 -0.204772 3.14008</pose>
+          <velocity>0 -4e-06 1e-06 0.0002 8e-06 -2.3e-05</velocity>
+          <acceleration>8.9e-05 -0.018253 -0.00222 1.61175 -0.739606 -1.76038</acceleration>
+          <wrench>3.7e-05 -0.007572 -0.000921 0 -0 0</wrench>
+        </link>
+        <link name='vx300s/right_finger_link'>
+          <pose frame=''>0.697828 0.043053 0.210321 -0.000488 0.598941 3.13974</pose>
+          <velocity>5.6e-05 -1.9e-05 3.7e-05 0.00062 -1.9e-05 -0.000922</velocity>
+          <acceleration>0.079051 0.000636 0.049765 0.523059 0.017411 -0.938131</acceleration>
+          <wrench>0.002751 2.2e-05 0.001732 0 -0 0</wrench>
+        </link>
+        <link name='vx300s/shoulder_link'>
+          <pose frame=''>0.8 -0 0.1787 0 -0 3.14008</pose>
+          <velocity>0 -0 0 4e-06 -0 5e-06</velocity>
+          <acceleration>-1e-06 -0.000824 3e-06 -0.64146 -0.000144 0.116885</acceleration>
+          <wrench>-1e-06 -0.000658 2e-06 0 -0 0</wrench>
+        </link>
+        <link name='vx300s/upper_arm_link'>
+          <pose frame=''>0.8 0 0.22675 -3.14159 -1.37693 -0.001516</pose>
+          <velocity>0 -0 0 1e-05 1e-06 5e-06</velocity>
+          <acceleration>1.4e-05 0.003548 3e-05 0.428666 -0.000771 -0.140509</acceleration>
+          <wrench>1.1e-05 0.002812 2.4e-05 0 -0 0</wrench>
+        </link>
+        <link name='vx300s/upper_forearm_link'>
+          <pose frame=''>1.10585 -0.000464 0.227389 -3.14159 -0.204772 3.14008</pose>
+          <velocity>0 -1e-06 -0 4.7e-05 8e-06 0</velocity>
+          <acceleration>0.000594 -0.007245 0.002916 -1.96772 1.30402 -2.85648</acceleration>
+          <wrench>0.000192 -0.002335 0.00094 0 -0 0</wrench>
+        </link>
+        <link name='vx300s/wrist_link'>
+          <pose frame=''>0.81212 -1.8e-05 0.288392 3.14112 0.598974 3.13973</pose>
+          <velocity>1e-06 -5e-06 2e-06 0.000199 -2.3e-05 -1.7e-05</velocity>
+          <acceleration>0.002948 0.01151 0.005176 -1.92379 -0.141393 0.737929</acceleration>
+          <wrench>0.00034 0.001328 0.000597 0 -0 0</wrench>
+        </link>
+      </model>
+      <light name='sun'>
+        <pose frame=''>0 0 10 0 -0 0</pose>
+      </light>
+    </state>
+    <gui fullscreen='0'>
+      <camera name='user_camera'>
+        <pose frame=''>0.51965 -1.61207 1.23989 -0 0.487642 1.5762</pose>
+        <view_controller>orbit</view_controller>
+        <projection_type>perspective</projection_type>
+      </camera>
+    </gui>
+  </world>
+</sdf>
